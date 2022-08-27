@@ -30,7 +30,6 @@ Mis pasatiempos son jugar videojuegos y ver series. Algunos de mis videojuegos f
 | Bioshock       	|  South Park       |
 
 
-> isaidhas
 
   
 
