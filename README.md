@@ -21,7 +21,7 @@
 Me gustaría especializarme en móviles aunque también me gustán las bases de datos. Lo que menos me gusta de mi carrera son HTML y CSS pero si me gusta programar del lado del servidor.
 
 ### Pasatiempos
-Mis pasatiempos son jugar videojuegos y ver series. Algunos de mis videojuegos favoritos son:
+Mis pasatiempos son jugar videojuegos y ver series. Algunos de mis videojuegos y series favoritos son:
 
 | **Videojuego**    | **Series**        |
 |-------------------|-------------------|
