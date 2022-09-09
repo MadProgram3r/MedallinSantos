@@ -1,0 +1,19 @@
+.Opcion{
+    background-color: crimson;
+}
+
+ul > li > ul{
+    display: none;
+}
+
+ul > li:hover > ul{
+    display: block;
+}
+
+.InOpcion {
+    background-color: blue;
+}
+
+.InOpcion:hover {
+    background-color: green;
+}
