@@ -14,25 +14,27 @@
 
 .caja {
     float: left;
-    border: 2px solid blue;
+    border: 2px solid red;
     /*width: 100px;*/
-    width: calc((100% / 6) - 4px);
+    width: calc((100% / 9) - 4px);
     height: 100px;
     text-align: center;
     margin: 2px;
 }
 
-@media screen and (max-width:399px) {
+@media screen and (max-width:399px) and (min-width:200px){
 
     .caja {
-        clear: left;
         float: left;
         border: 2px solid blue;
         /*width: 100px;*/
-        width: calc((100%) - 4px);
+        width: calc((100%/2) - 4px);
         height: 100px;
         text-align: center;
         margin: 2px;
+    }
+    #caja2{
+        clear: left;
     }
 
 }
@@ -50,4 +52,19 @@
         text-align: center;
         margin: 2px;
     }
+}
+
+@media screen and (max-width:199px){
+
+    .caja {
+        clear: left;
+        float: left;
+        border: 2px solid blue;
+        /*width: 100px;*/
+        width: calc((100%) - 4px);
+        height: 100px;
+        text-align: center;
+        margin: 2px;
+    }
+
 }
