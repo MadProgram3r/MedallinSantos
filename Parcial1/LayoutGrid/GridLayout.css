@@ -45,13 +45,25 @@ padding: 0;
     grid-area: col3;
 }
 
-@media screen and (max-width:800px){
+@media screen and (max-width:800px) and (min-width:400px){
     .contenedor{
-        grid-template-areas: "enca enca enca"
-                              "col1 col1 col2"
-                              "foot foot foot";
+        grid-template-columns: 60% 40%;
+        grid-template-rows: 40% 40% 20%;
+        grid-template-areas: "col1 col3"
+                             "col2 col3"
+                             "foot col3";
     }
 
-    #col3{display: none;}
 }
 
+@media screen and (max-width:399px){
+    .contenedor{
+        grid-template-columns: 100%;
+        grid-template-rows: 30% 30% 30% 10%;
+        grid-template-areas: "col1"
+                             "col2"
+                             "col3"
+                             "foot";
+    }
+
+}
