@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="DelegacionEventoJquery.css">
+    <script src="/jquery-3.6.1.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="contenedor" id="contenedor">
+            <a id="caja1" class="caja">Opcion1</a>
+            <a id="caja2" class="caja">Opcion2</a>
+            <a id="caja3" class="caja">Opcion3</a>
+            <a id="caja4" class="caja">Opcion4</a>
+            <a id="caja5" class="caja">Opcion5</a>
+            <a id="caja6" class="caja">Opcion6</a>
+            <a id="caja7" class="caja">Opcion7</a>
+            <a id="caja8" class="caja">Opcion8</a>
+            <a id="caja8" class="caja">Opcion9</a>
+
+    </div>
+
+    <script>
+        /*document.getElementById("contenedor").onclick = function() {
+            let target = event.target;
+
+            cambiarColor(target);
+        };
+
+        function cambiarColor(target) {
+            
+            if(target.classList.contains("colorR")){
+                target.classList.remove('colorR');
+            }else{
+                target.classList.add('colorR');
+            }
+            console.log(target.classList);
+        }*/
+
+        $(document).ready(function(event){
+            $("#contenedor").click(function(event){
+                if(event.target.classList.contains("colorR")){
+                    event.target.classList.remove('colorR');
+                }else{
+                    event.target.classList.add('colorR');
+                }
+            })
+        })
+    </script>
+</body>
+</html>
