@@ -1,0 +1,11 @@
+.formulario{
+    width: 100%;
+}
+
+.descripcion{
+    height: 100px;
+}
+
+body{
+    background-image:url("Pokeball.jpg");
+}
