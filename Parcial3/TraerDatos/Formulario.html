@@ -97,6 +97,20 @@
           
            console.log(datoJson[0]);
   })
+
+  document.getElementById("submit").addEventListener("click", async function(){
+    data = new FormData(form1);
+    let response = await fetch("insertarDato.php",{
+      method: 'Post',
+      body: data
+    })
+           let datoJson = await response.json();
+           if(response.status == 200){
+              
+           }
+          
+           console.log(datoJson[0]);
+  })
   </script>
 </body>
 </html>
