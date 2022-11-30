@@ -1,5 +1,5 @@
 <?php
-$ID = $_POST['id'];
+$ID = $_POST['idModal'];
 //$ID = 94;
 $baseDatos = "pokedex";
 $usuario = "root";
