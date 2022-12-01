@@ -13,7 +13,9 @@ $password = "";
 $servidor = "";
 
 $con = mysqli_connect($servidor, $usuario, $password, $baseDatos) or die("Problemas de conexion");
-$consulta = "INSERT INTO pokemon (ID, Nombre, Categoria, Tipo1, Tipo2, Descripcion) VALUES ($Id , $Categoria , $Nombre , $Tipo1 , $Tipo2 , $Descripcion)";
+$consulta = "INSERT INTO pokemon (ID, Nombre, Categoria, Tipo1, Tipo2, Descripcion) VALUES ($Id , '$Categoria' , '$Nombre' ,
+ '$Tipo1' , '$Tipo2' , '$Descripcion')";
+
 if(mysqli_query($con, $consulta)){
     $response["estado"] = "Ok";
     $response["message"] = "Registro agregado correctamente";
