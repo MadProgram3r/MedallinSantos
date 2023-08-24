@@ -1,0 +1,87 @@
+<html lang="en">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="module" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="Translate">Texto: Hello, I Use ... buddy!</div>
+    <div id="TranslatedFetch">Pirate: </div>
+    <button id="translateButton">Fetch</button>
+    <button id="xmlButton">XMLHttpRequest</button>
+    <button id="axiosButton">Axios</button>
+    <button id="jqueryButton">jquery</button>
+    <button id="promiseButton">Promise</button>
+
+
+    <script>
+
+        document.getElementById("translateButton").addEventListener("click", async () => {
+
+            let response = await fetch("https://api.funtranslations.com/translate/pirate.json?text=Hello, I Use Fetch buddy!", { 
+            method: "GET"
+            });
+
+            let data = await response.json();
+            document.getElementById('TranslatedFetch').innerText = 'Pirate: '+data['contents']['translated'];
+            console.log(data['contents']['translated']);
+
+        })
+
+        document.getElementById("promiseButton").addEventListener("click", () => {
+
+        let fetchPromise = fetch("https://api.funtranslations.com/translate/pirate.json?text=Hello, I Use Promise buddy!");
+        fetchPromise.then(response =>{
+            return response.json();
+        }).then(data => {
+            document.getElementById('TranslatedFetch').innerText = 'Pirate: '+data['contents']['translated'];
+        })
+
+        })
+
+
+        const xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+        xhr.responseType = 'json';
+
+        xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === this.DONE) {
+            console.log(this.response);
+            document.getElementById('TranslatedFetch').innerText = 'Pirate: '+this.response['contents']['translated'];
+        }
+        });
+        document.getElementById('xmlButton').addEventListener("click", () => {
+            let dataXML;
+            xhr.open("GET", "https://api.funtranslations.com/translate/pirate.json?text=Hello, I Use XML buddy!");
+            dataXML = xhr.send();
+        });
+
+        let reqOptions = {
+            url: "https://api.funtranslations.com/translate/pirate.json?text=Hello, I Use Axios buddy!",
+            method: "GET",
+        }
+        document.getElementById('axiosButton').addEventListener("click", async () => {
+            let response = await axios.request(reqOptions);
+            console.log(response.data);
+            document.getElementById('TranslatedFetch').innerText = 'Pirate: '+response.data['contents']['translated'];
+        });
+
+        document.getElementById('jqueryButton').addEventListener("click", async () => {
+
+
+            $.ajax("https://api.funtranslations.com/translate/pirate.json?text=Hello, I Use Jquery buddy!").done(function (response) {
+            console.log(response);
+            document.getElementById('TranslatedFetch').innerText = 'Pirate: '+response['contents']['translated'];
+
+            });
+        });
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="razas">Razas</label>
+    <select id="razas"></select>
+    <div></div>
+    <button id="perroButton">Pedir Perro</button>
+    <img src="" class="image1" alt="" id="image" width="100" height="100">
+    <script>
+        let image = document.getElementsByClassName('image1');
+        window.onload = function () {
+            let fetchPromise = fetch("https://dog.ceo/api/breeds/list/all");
+            fetchPromise.then(response =>{
+            return response.json();
+            }).then(data => {
+                console.log(data);
+                let razas = Object.keys(data.message);
+                console.log 
+
+                razas.forEach( elemento => {
+                    let opcion = document.createElement('option');
+                    opcion.value  = elemento;
+                    opcion.text = elemento;
+                    document.getElementById('razas').appendChild(opcion);
+                })
+            })
+            
+        }
+        document.getElementById('perroButton').addEventListener("click", async () => {
+            let raza = document.getElementById('razas').value;
+            let response = await fetch("https://dog.ceo/api/breed/"+raza+"/images", { 
+            method: "GET"
+            });
+
+            let data = await response.json();
+            console.log(data['message'][0]);
+
+            image.src = data['message'][0];
+
+        })
+    </script>
+</body>
+</html>
