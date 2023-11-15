@@ -1,0 +1,63 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="formDatos" action="http://localhost:8080/medicamentosUrlEncode" method="post"
+        enctype="application/x-www-form-urlencoded">
+        <label for="Nombre">Nombre</label>
+        <input type="text" name="Nombre" id="Nombre">
+        <label for="Precio">Precio</label>
+        <input type="number" name="Precio" id="Precio">
+        <label for="Existencias">Existencias</label>
+        <input type="number" name="Existencias" id="Existencias">
+        <label for="Tipo">Tipo</label>
+        <input type="text" name="Tipo" id="Tipo">
+        <label for="IdSucursal">IdSucursal</label>
+        <input type="text" name="IdSucursal" id="IdSucursal">
+        <button id="urlEncode">Enviar UrlEncode</button>
+    </form>
+    <script>
+        document.getElementById('urlEncode').addEventListener('click', () => {
+            const formData = new FormData(document.querySelector('formDatos'));
+            const urlEncodedData = new URLSearchParams(formData).toString();
+            fetch('http://localhost:8080/medicamentosUrlEncode', {
+                method: 'POST',
+                body: urlEncodedData,
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            }
+            )
+                .then((response) => {
+                    console.log(response.json());
+                })
+                .then((data) => {
+                    console.log(data);
+                })
+        })
+
+        document.getElementById('multipart').addEventListener('click', () => {
+            const formData = new FormData(document.querySelector('formDatos'));
+            fetch('http://localhost:8080/medicamentosMultipart', {
+                method: 'POST', // O el método HTTP que desees usar
+                body: formData, // Aquí usamos el objeto FormData directamente
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error('La solicitud no fue exitosa');
+                    }
+                    return response.json(); // Si esperas una respuesta JSON del servidor
+                })
+                .then((data) => {
+                 // Manejar la respuesta del servidor
+                console.log(data);
+                })
+        })
+    </script>
+</body>
+
+</html>

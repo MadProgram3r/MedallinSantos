@@ -1,12 +1,16 @@
 {
   "name": "papakete2",
   "version": "1.0.0",
-  "type":"module",
+  "type": "module",
   "description": "Paquete de prueba 2",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "doc": "jsdoc -c jsdoc.json --readme README.MD --verbose"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "clean-jsdoc-theme": "^4.2.13"
+  }
 }

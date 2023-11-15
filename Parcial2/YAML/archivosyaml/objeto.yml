@@ -1,0 +1,20 @@
+carro:
+  marca: Toyota
+  modelo: Corolla
+  año: 2023
+  color: Plateado
+  características:
+    - Transmisión automática
+    - Motor de 4 cilindros
+    - Sistema de frenos ABS
+    - Control de tracción
+  dimensiones:
+    longitud: 4.6 metros
+    ancho: 1.8 metros
+    altura: 1.4 metros
+  precio: 25000
+  opciones:
+    - Aire acondicionado
+    - Sistema de sonido premium
+    - Techo solar
+  propietario: Juan Pérez

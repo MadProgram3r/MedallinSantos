@@ -4,35 +4,77 @@ const fs     = require('fs');
 const path   = require('path');
 const mysql = require('mysql2/promise');
 const { json } = require('body-parser');
+const { SwaggerTheme } = require('swagger-themes');
 const { query } = require('express');
 const basicAuth = require('express-basic-auth');
 var cors = require('cors');
 var multer = require('multer');
-const upload = multer({ dest: 'uploads/' });
-const prueba = require('./prueba.js');
+const upload = multer({ dest: 'uploads/' })
+const prueba = require('./prueba.js')
+const redoc = require('redoc-express');
 const swaggerUI     = require('swagger-ui-express');
 const swaggerJsDoc  = require('swagger-jsdoc');
-const swaggerDocs = swaggerJsDoc(swaggerOptions);
+
+const def = fs.readFileSync(path.join(__dirname,'./swaggerOptions.json'),
+    {encoding:'utf8', flag:'r'});
+const read = fs.readFileSync(path.join(__dirname,'./README.MD'),{encoding:'utf8',flag:'r'})
+
+const defObj = JSON.parse(def)
+defObj.info.description = read;
 
 const swaggerOptions = {
-    definition: {
-    openapi: '3.0.0',
-    info: {
-    title: 'API Empleados',
-    version: '1.0.0',
-    },
-    servers:[
-    {url: "http://localhost:8080"}
-    ],
-    },
-    apis: [`${path.join(__dirname,"./index.js")}`],
-    };
+    definition:defObj,
+    apis:[`${path.join(__dirname,"./index.js")}`]
+}
+const theme = new SwaggerTheme('v3');
+
+const options = {
+    explorer: true,
+    customCss: theme.getBuffer('muted')
+  };
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
 
-
-app.use("/api-docs",swaggerUI.serve,swaggerUI.setup(swaggerDocs));
 
 const app = express();
+app.use("/api-docs",swaggerUI.serve,swaggerUI.setup(swaggerDocs,options));
+app.use("/api-docs.json",(req,res)=>{
+    res.json(swaggerDocs);
+});
+
+app.get(
+    '/api-docs.redoc',
+    redoc({
+      title: 'API Docs',
+      specUrl: '/api-docs.json',
+      nonce: '', // <= it is optional,we can omit this key and value
+      // we are now start supporting the redocOptions object
+      // you can omit the options object if you don't need it
+      // https://redocly.com/docs/api-reference-docs/configuration/functionality/
+      redocOptions: {
+        theme: {
+          colors: {
+            primary: {
+              main: '#6EC5AB'
+            }
+          },
+          typography: {
+            fontFamily: `"museo-sans", 'Helvetica Neue', Helvetica, Arial, sans-serif`,
+            fontSize: '15px',
+            lineHeight: '1.5',
+            code: {
+              code: '#87E8C7',
+              backgroundColor: '#4D4D4E'
+            }
+          },
+          menu: {
+            backgroundColor: '#ffffff'
+          }
+        }
+      }
+    })
+  );
 
 app.use('/prueba',prueba.router);
 
@@ -49,7 +91,6 @@ app.use(morgan('combined', {stream: accessLogStream}));
 app.use(express.json());
 app.use(express.urlencoded())
 app.use(cors());
-
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -70,6 +111,22 @@ app.get("/medicamentos", (req, res,next) => {
     }
 
 });
+
+/**
+ * @swagger
+ * /farmacias/:
+ *   get:
+ *     tags:
+ *       - farmacias
+ *     summary: Consultar las farmacias
+ *     description: Trae todas las farmacias
+ *     responses:
+ *      '200':
+ *       description: successful operation    
+ *      '400':
+ *       description: Invalid status value
+ * 
+ */
 
 app.get("/farmacias", (req, res) => {
     mysql.createConnection({ host: 'localhost', user: 'root', password: '', database: 'medicalsearch' })
