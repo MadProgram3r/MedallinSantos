@@ -114,18 +114,32 @@ app.get("/medicamentos", (req, res,next) => {
 
 /**
  * @swagger
- * /farmacias/:
- *   get:
- *     tags:
- *       - farmacias
- *     summary: Consultar las farmacias
- *     description: Trae todas las farmacias
- *     responses:
- *      '200':
- *       description: successful operation    
- *      '400':
- *       description: Invalid status value
- * 
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Farmacias API",
+    "description": "API para consultar información de farmacias"
+  },
+  "paths": {
+    "/farmacias/": {
+      "get": {
+        "tags": ["farmacias"],
+        "summary": "Consultar las farmacias",
+        "description": "Trae todas las farmacias",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {}
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    }
+  }
+}
  */
 
 app.get("/farmacias", (req, res) => {
